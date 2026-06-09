@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Taipei City Activities</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f5f7fb;
+            color: #333;
+            padding: 30px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h2 {
+            text-align: center;
+            color: #1a365d;
+            margin-bottom: 30px;
+        }
+        .card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        .data-index {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #2b6cb0;
+            border-bottom: 2px solid #ebf8ff;
+            padding-bottom: 8px;
+            margin-bottom: 12px;
+        }
+        .item {
+            margin: 8px 0;
+            line-height: 1.6;
+        }
+        .label {
+            font-weight: bold;
+            color: #4a5568;
+            display: inline-block;
+            min-width: 90px;
+        }
+        .link-url {
+            color: #3182ce;
+            text-decoration: none;
+            word-break: break-all;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>New Taipei City Open Data - Activities</h2>
+
+    {% for row in activities %}
+    <div class="card">
+        <div class="data-index">Data Item #{{ loop.index }}</div>
+        
+        <div class="item"><span class="label">【標題】</span> {{ row.get('標題') or '' }}</div>
+        <div class="item"><span class="label">【類型】</span> {{ row.get('類型') or '' }}</div>
+        <div class="item"><span class="label">【開始日期】</span> {{ row.get('開始日期') or '' }}</div>
+        <div class="item"><span class="label">【結束日期】</span> {{ row.get('結束日期') or '' }}</div>
+        <div class="item"><span class="label">【發佈時間】</span> {{ row.get('發佈時間') or '' }}</div>
+        
+        {% if row.get('連結') %}
+        <div class="item">
+            <span class="label">【連結】</span> 
+            <a class="link-url" href="{{ row.get('連結') }}" target="_blank">{{ row.get('連結') }}</a>
+        </div>
+        {% endif %}
+        
+        <div class="item"><span class="label">【簡介】</span> {{ row.get('簡介') or '' }}</div>
+    </div>
+    {% endfor %}
+
+</body>
+</html>
